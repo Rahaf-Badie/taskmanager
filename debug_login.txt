@@ -1,0 +1,17 @@
+Redirecting to /TaskManager/member/dashboard.php as role=member
+Redirecting to /TaskManager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /TaskManager/manager/dashboard.php as role=manager
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /TaskManager/manager/dashboard.php as role=manager
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /TaskManager/manager/dashboard.php as role=manager
+Redirecting to /TaskManager/manager/dashboard.php as role=manager
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
+Redirecting to /taskmanager/member/dashboard.php as role=member
