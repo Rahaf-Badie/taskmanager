@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
       taskTable.appendChild(row);
     });
 
-    // ربط أزرار Edit / Delete ديناميكيًا
     document.querySelectorAll('.editTask').forEach(btn => {
       btn.addEventListener('click', () => {
         const task = tasksData.find(x => x.id == btn.dataset.id);
@@ -106,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', async () => {
         if (!confirm('Are you sure you want to delete this task?')) return;
         try {
-          const res = await fetch('/TaskManager2/manager/tasks_api.php', {
+          const res = await fetch('/taskmanager/manager/tasks_api.php', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `id=${btn.dataset.id}`
@@ -120,23 +119,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadMembers() {
     if (!taskAssigned || !editTaskAssigned) return;
-    fetch('/TaskManager2/manager/tasks_api.php?mode=members')
+    fetch('/taskmanager/manager/tasks_api.php?mode=members')
       .then(res => res.json())
       .then(data => {
+        console.log('Members from API:', data);
         members = data.members ?? [];
+
+        // مسح الخيارات القديمة
         taskAssigned.innerHTML = '';
         editTaskAssigned.innerHTML = '';
+
         members.forEach(m => {
-          const option = `<option value="${m.id}">${m.name}</option>`;
-          taskAssigned.innerHTML += option;
-          editTaskAssigned.innerHTML += option;
+          const option1 = document.createElement('option');
+          option1.value = m.id;
+          option1.textContent = m.name;
+          taskAssigned.appendChild(option1);
+
+          const option2 = document.createElement('option');
+          option2.value = m.id;
+          option2.textContent = m.name;
+          editTaskAssigned.appendChild(option2);
         });
-      });
+      })
+      .catch(err => console.error('Error loading members:', err));
   }
 
   async function loadTasks() {
     try {
-      const res = await fetch('/TaskManager2/manager/tasks_api.php');
+      const res = await fetch('/taskmanager/manager/tasks_api.php');
       const data = await res.json();
       tasks = data.tasks ?? [];
       renderTable(tasks);
@@ -164,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('status', taskStatus.value);
       formData.append('due_date', taskDueDate.value);
 
-      const res = await fetch('/TaskManager2/manager/tasks_api.php', {
+      const res = await fetch('/taskmanager/manager/tasks_api.php', {
         method: 'POST',
         body: formData
       });
@@ -188,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('status', editTaskStatus.value);
       formData.append('due_date', editTaskDueDate.value);
 
-      const res = await fetch('/TaskManager2/manager/tasks_api.php', {
+      const res = await fetch('/taskmanager/manager/tasks_api.php', {
         method: 'PUT',
         body: formData
       });
