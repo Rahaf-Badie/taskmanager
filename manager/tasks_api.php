@@ -26,7 +26,8 @@ $allowedPrio   = ['Low','Medium','High'];
    يرجع أعضاء الفريق role='member'
 */
 if (($_GET['mode'] ?? '') === 'members') {
-  $stmt = $pdo->prepare("SELECT id, name, email FROM users WHERE role='member' ORDER BY name");
+  //$stmt = $pdo->prepare("SELECT id, name, email FROM users WHERE role='member' ORDER BY name");
+  $stmt = $pdo->prepare("SELECT id, name, email FROM members ORDER BY name");
   $stmt->execute();
   $members = $stmt->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode(['members' => $members]);
@@ -91,7 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (!in_array($stat, $allowedStatus, true)) json422('invalid status');
 
   // تأكيد أن المستخدم عضو
-  $chk = $pdo->prepare("SELECT id FROM users WHERE id=? AND role='member'");
+  //$chk = $pdo->prepare("SELECT id FROM users WHERE id=? AND role='member'");
+  $chk = $pdo->prepare("SELECT id FROM members WHERE id=?");
   $chk->execute([$uid]);
   if (!$chk->fetch()) json422('member not found');
 
